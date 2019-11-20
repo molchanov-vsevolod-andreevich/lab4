@@ -11,7 +11,7 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 
 public class AkkaApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
