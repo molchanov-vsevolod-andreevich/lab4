@@ -16,7 +16,7 @@ public class MainHttp extends AllDirectives {
     private final ActorRef auction;
 
     private MainHttp(final ActorSystem system) {
-        auction = system.actorOf(HttpServerActorInteractionExample.Auction.props(), "auction");
+        auction = system.actorOf(Auction.props(), "auction");
     }
 
     public static void main(String[] args) throws Exception {
