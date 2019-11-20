@@ -4,7 +4,7 @@ import akka.actor.Props;
 public class StoreActor extends AbstractActor {
 
     public static Props props() {
-
+        
     }
 
     @Override
