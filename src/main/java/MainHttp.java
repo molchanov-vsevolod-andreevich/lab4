@@ -13,8 +13,6 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 
 public class MainHttp extends AllDirectives {
-    private final ActorRef auction;
-
     private MainHttp(final ActorSystem system) {
         auction = system.actorOf(Auction.props(), "auction");
     }
