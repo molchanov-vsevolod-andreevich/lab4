@@ -5,12 +5,13 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.server.AllDirectives;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
 import java.util.concurrent.CompletionStage;
 
-public class MainHttp {
+public class MainHttp extends AllDirectives {
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
 
