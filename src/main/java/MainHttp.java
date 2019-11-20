@@ -48,13 +48,6 @@ public class MainHttp extends AllDirectives {
 
     private Route createRoute() {
         return route(
-                path("semaphore", () ->
-                        route(
-                                get( () -> {
-                                    Future<Object> result = Patterns.ask(testPackageActor,
-                                            SemaphoreActor.makeRequest(), 5000);
-                                    return completeOKWithFuture(result, Jackson.marshaller());
-                                }))),
                 path("test", () ->
                         route(
                                 post(() ->
