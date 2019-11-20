@@ -8,7 +8,7 @@ import javax.script.ScriptEngineManager;
 public class TestPackageActor extends AbstractActor {
 
     public static Props props() {
-
+        return Props.create(TestPackageActor.class);
     }
 
     @Override

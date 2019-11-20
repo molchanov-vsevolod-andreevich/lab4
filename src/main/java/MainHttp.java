@@ -17,8 +17,8 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 public class MainHttp extends AllDirectives {
-    private StoreActor storeActor;
-    private TestPackageActor testPackageActor;
+    private ActorRef storeActor;
+    private ActorRef testPackageActor;
 
     private MainHttp(final ActorSystem system) {
         storeActor = system.actorOf(StoreActor.props(), "storeActor");
