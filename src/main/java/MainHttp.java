@@ -1,4 +1,5 @@
 import akka.NotUsed;
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
@@ -12,8 +13,10 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 
 public class MainHttp extends AllDirectives {
+    private final ActorRef auction;
+
     private MainHttp(final ActorSystem system) {
-        auction = system.actorOf(Auction.props(), "auction");
+        auction = system.actorOf(HttpServerActorInteractionExample.Auction.props(), "auction");
     }
 
     public static void main(String[] args) throws Exception {
