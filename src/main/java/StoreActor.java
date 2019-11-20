@@ -13,7 +13,7 @@ public class StoreActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return null;
+        
     }
 
     public static class StoreMessage {
