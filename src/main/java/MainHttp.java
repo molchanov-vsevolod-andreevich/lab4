@@ -46,7 +46,7 @@ public class MainHttp extends AllDirectives {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    private Route createRoute() {
+    private Route createRoute(ActorSystem system) {
         return route(
                 path("test", () ->
                         route(
@@ -62,6 +62,6 @@ public class MainHttp extends AllDirectives {
                                         {
                                             storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store ! key=" + key + " value=" + value);
-                                        })))),
+                                        }))))
     }
 }

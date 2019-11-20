@@ -11,4 +11,9 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return null;
     }
+
+    public static class StoreMessage {
+        public StoreMessage(String key, String value) {
+        }
+    }
 }
