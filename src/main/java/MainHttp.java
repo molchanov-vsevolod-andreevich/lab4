@@ -21,8 +21,8 @@ public class MainHttp extends AllDirectives {
     private TestPackageActor testPackageActor;
 
     private MainHttp(final ActorSystem system) {
-        storeActor = system.actorOf(StoreActor.props(), "store");
-        testPackageActor = system.actorOf(TestPackageActor.props(), "test");
+        storeActor = system.actorOf(StoreActor.props(), "storeActor");
+        testPackageActor = system.actorOf(TestPackageActor.props(), "testActor");
     }
 
     public static void main(String[] args) throws Exception {
