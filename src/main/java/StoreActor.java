@@ -1,6 +1,6 @@
 import akka.actor.AbstractActor;
 
-public class StorageActor extends AbstractActor {
+public class StoreActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
