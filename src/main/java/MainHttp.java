@@ -13,7 +13,7 @@ import java.util.concurrent.CompletionStage;
 
 public class MainHttp extends AllDirectives {
     private MainHttp(ActorSystem system) {
-        
+        auction = system.actorOf(Auction.props(), "auction");
     }
 
     public static void main(String[] args) throws Exception {
