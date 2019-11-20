@@ -62,10 +62,7 @@ public class MainHttp extends AllDirectives {
                                         {
                                             storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store ! key=" + key + " value=" + value);
-                                        })))),
-                (value) -> {
-                        storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
-                        return complete("value saved to store ! key=" + key + " value=" + value);
+                                        })))));
         }
     }
 }
