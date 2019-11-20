@@ -54,7 +54,11 @@ public class MainHttp extends AllDirectives {
                                         entity(Jackson.unmarshaller(TestPackageMsg.class), msg -> {
                                             testPackageActor.tell(msg, ActorRef.noSender());
                                             return complete("Test started!");
-                                        })))),
+                                        }
+                                        )
+                                )
+                        )
+                ),
                 path("put", () ->
                         get(() ->
                                 parameter("key", (key) ->
@@ -62,6 +66,10 @@ public class MainHttp extends AllDirectives {
                                         {
                                             storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store ! key=" + key + " value=" + value);
-                                        })))),
+                                        }
+                                        )
+                                )
+                        )
+                ),
     }
 }
