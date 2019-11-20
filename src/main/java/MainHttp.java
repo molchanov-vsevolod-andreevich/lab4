@@ -1,7 +1,13 @@
+import akka.actor.ActorSystem;
 import akka.http.javadsl.server.Route;
 
 public class MainHttp {
-    public Route createRoute() {
+
+    public MainHttp(ActorSystem system) {
         
+    }
+
+    public Route createRoute() {
+
     }
 }
