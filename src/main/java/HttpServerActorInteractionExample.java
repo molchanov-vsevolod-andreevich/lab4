@@ -1,6 +1,10 @@
-import akka.Done;
 import akka.NotUsed;
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
+import akka.actor.AbstractActor;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
@@ -10,19 +14,22 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.server.AllDirectives;
 import akka.http.javadsl.server.Route;
+import akka.http.javadsl.unmarshalling.StringUnmarshallers;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import akka.util.Timeout;
+import scala.concurrent.duration.FiniteDuration;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 
-import static akka.http.javadsl.server.PathMatchers.longSegment;
+import static akka.pattern.PatternsCS.ask;
 
-public class JacksonExampleTest extends AllDirectives {
+public class HttpServerActorInteractionExample extends AllDirectives {
+
+    private final ActorRef auction;
 
     public static void main(String[] args) throws Exception {
         // boot up server using the route as defined below
@@ -32,7 +39,7 @@ public class JacksonExampleTest extends AllDirectives {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         //In order to access all directives we need an instance where the routes are define.
-        JacksonExampleTest app = new JacksonExampleTest();
+        HttpServerActorInteractionExample app = new HttpServerActorInteractionExample(system);
 
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = app.createRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(routeFlow,
@@ -46,71 +53,73 @@ public class JacksonExampleTest extends AllDirectives {
                 .thenAccept(unbound -> system.terminate()); // and shutdown when done
     }
 
-    // (fake) async database query api
-    private CompletionStage<Optional<Item>> fetchItem(long itemId) {
-        return CompletableFuture.completedFuture(Optional.of(new Item("foo", itemId)));
-    }
-
-    // (fake) async database query api
-    private CompletionStage<Done> saveOrder(final Order order) {
-        return CompletableFuture.completedFuture(Done.getInstance());
+    private HttpServerActorInteractionExample(final ActorSystem system) {
+        auction = system.actorOf(Auction.props(), "auction");
     }
 
     private Route createRoute() {
-
         return concat(
-                get(() ->
-                        pathPrefix("item", () ->
-                                path(longSegment(), (Long id) -> {
-                                    final CompletionStage<Optional<Item>> futureMaybeItem = fetchItem(id);
-                                    return onSuccess(futureMaybeItem, maybeItem ->
-                                            maybeItem.map(item -> completeOK(item, Jackson.marshaller()))
-                                                    .orElseGet(() -> complete(StatusCodes.NOT_FOUND, "Not Found"))
-                                    );
-                                }))),
-                post(() ->
-                        path("create-order", () ->
-                                entity(Jackson.unmarshaller(Order.class), order -> {
-                                    CompletionStage<Done> futureSaved = saveOrder(order);
-                                    return onSuccess(futureSaved, done ->
-                                            complete("order created")
-                                    );
-                                })))
-        );
+                path("auction", () -> concat(
+                        put(() ->
+                                parameter(StringUnmarshallers.INTEGER, "bid", bid ->
+                                        parameter("user", user -> {
+                                            // place a bid, fire-and-forget
+                                            auction.tell(new Bid(user, bid), ActorRef.noSender());
+                                            return complete(StatusCodes.ACCEPTED, "bid placed");
+                                        })
+                                )),
+                        get(() -> {
+                            final Timeout timeout = Timeout.durationToTimeout(FiniteDuration.apply(5, TimeUnit.SECONDS));
+                            // query the actor for the current auction state
+                            CompletionStage<Bids> bids = ask(auction, new GetBids(), timeout).thenApply((Bids.class::cast));
+                            return completeOKWithFuture(bids, Jackson.marshaller());
+                        }))));
     }
 
-    private static class Item {
+    static class Bid {
+        final String userId;
+        final int offer;
 
-        final String name;
-        final long id;
-
-        @JsonCreator
-        Item(@JsonProperty("name") String name,
-             @JsonProperty("id") long id) {
-            this.name = name;
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public long getId() {
-            return id;
+        Bid(String userId, int offer) {
+            this.userId = userId;
+            this.offer = offer;
         }
     }
 
-    private static class Order {
+    static class GetBids {
 
-        final List<Item> items;
+    }
 
-        @JsonCreator
-        Order(@JsonProperty("items") List<Item> items) {
-            this.items = items;
+    static class Bids {
+        public final List<Bid> bids;
+
+        Bids(List<Bid> bids) {
+            this.bids = bids;
+        }
+    }
+
+    static class Auction extends AbstractActor {
+
+        private final LoggingAdapter log = Logging.getLogger(context().system(), this);
+
+        List<HttpServerActorInteractionExample.Bid> bids = new ArrayList<>();
+
+        static Props props() {
+            return Props.create(Auction.class);
         }
 
-        public List<Item> getItems() {
-            return items;
+        @Override
+        public Receive createReceive() {
+            return receiveBuilder()
+                    .match(HttpServerActorInteractionExample.Bid.class, bid -> {
+                        bids.add(bid);
+                        log.info("Bid complete: {}, {}", bid.userId, bid.offer);
+                    })
+                    .match(HttpServerActorInteractionExample.GetBids.class, m -> {
+                        sender().tell(new HttpServerActorInteractionExample.Bids(bids), self());
+                    })
+                    .matchAny(o -> log.info("Invalid message"))
+                    .build();
         }
     }
 }
