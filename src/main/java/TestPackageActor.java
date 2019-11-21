@@ -9,8 +9,8 @@ import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
 
-    public static Props props(ActorRef) {
-        return Props.create(StoreActor.class);
+    public static Props props(ActorRef storeActor) {
+        return new RoundRobinPool(5).props(Props.create(TestPackageActor.class, storeActor));
     }
 
     @Override
