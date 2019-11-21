@@ -10,9 +10,9 @@ import javax.script.ScriptEngineManager;
 public class TestPackageActor extends AbstractActor {
     ActorRef storeActor;
 
-    public TestPackageActor(ActorRef storeActor) {
-        this.storeActor = storeActor;
-    }
+//    public TestPackageActor(ActorRef storeActor) {
+//        this.storeActor = storeActor;
+//    }
 
     @Override
     public Receive createReceive() {
