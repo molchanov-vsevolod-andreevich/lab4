@@ -19,9 +19,12 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 public class MainHttp extends AllDirectives {
+    private ActorRef storeActor;
+    private ActorRef testPackageActor;
 
-    public MainHttp() {
-
+    private MainHttp(final ActorSystem system) {
+        storeActor = system.actorOf(StoreActor.props(), "storeActor");
+        testPackageActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestPackageActor.class, storeActor)), "testActor");
     }
 
     public static void main(String[] args) throws Exception {
@@ -30,7 +33,7 @@ public class MainHttp extends AllDirectives {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        MainHttp instance = new MainHttp();
+        MainHttp instance = new MainHttp(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                 instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
