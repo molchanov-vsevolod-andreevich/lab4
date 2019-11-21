@@ -10,7 +10,7 @@ public class TestPackageActor extends AbstractActor {
 
     public static Props props() {
 //        return Props.create(TestPackageActor.class);
-        return RoundRobinPool()
+        return RoundRobinPool(5)
     }
 
     @Override
