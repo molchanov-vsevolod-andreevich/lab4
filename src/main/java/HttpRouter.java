@@ -5,9 +5,7 @@ import akka.http.javadsl.server.AllDirectives;
 import akka.http.javadsl.server.Route;
 
 public class HttpRouter extends AllDirectives {
-    public HttpRouter() {
-
-    }
+    public HttpRouter() {}
 
     private Route createRoute(ActorSystem system) {
         return route(
