@@ -24,7 +24,7 @@ public class MainHttp extends AllDirectives {
 
     private MainHttp(final ActorSystem system) {
         storeActor = system.actorOf(StoreActor.props(), "storeActor");
-        testPackageActor = system.actorOf(TestPackageActor.props(storeActor), "testActor");
+        testPackageActor = system.actorOf(new RoundRobinPool(5).props() TestPackageActor.props(storeActor), "testActor");
     }
 
     public static void main(String[] args) throws Exception {
