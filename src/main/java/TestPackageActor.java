@@ -8,6 +8,10 @@ import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
 
+    public static Props props(RepointableActorRef ) {
+        return Props.create(StoreActor.class);
+    }
+
     @Override
     public Receive createReceive() {
         return null;
