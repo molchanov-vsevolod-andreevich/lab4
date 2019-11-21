@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.routing.RoundRobinPool;
 
@@ -8,7 +9,7 @@ import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
 
-    public static Props props(RepointableActorRef ) {
+    public static Props props(ActorRef) {
         return Props.create(StoreActor.class);
     }
 
