@@ -9,8 +9,8 @@ public class RouteActor extends AbstractActor {
     private ActorRef testPackageActor;
 
     private RouteActor() {
-        storeActor = system.actorOf(StoreActor.props(), "storeActor");
-        testPackageActor = system.actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
+        storeActor = getContext().actorOf(StoreActor.props(), "storeActor");
+        testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
     }
 
     @Override
