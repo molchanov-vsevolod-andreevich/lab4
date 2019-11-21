@@ -18,7 +18,11 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
-public class MainHttp {
+public class MainHttp extends AllDirectives {
+
+    public MainHttp() {
+
+    }
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
@@ -26,7 +30,7 @@ public class MainHttp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        HttpRouter instance = new HttpRouter();
+        MainHttp instance = new MainHttp();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                 instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
@@ -39,5 +43,24 @@ public class MainHttp {
         binding
                 .thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> system.terminate());
+    }
+
+    private Route createRoute(ActorSystem system) {
+        return route(
+                path("test", () ->
+                        route(
+                                post(() ->
+                                        entity(Jackson.unmarshaller(TestPackageMsg.class), msg -> {
+                                            testPackageActor.tell(msg, ActorRef.noSender());
+                                            return complete("Test started!");
+                                        })))),
+                path("put", () ->
+                        get(() ->
+                                parameter("key", (key) ->
+                                        parameter("value", (value) ->
+                                        {
+                                            storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
+                                            return complete("value saved to store! key=" + key + " value=" + value);
+                                        })))));
     }
 }
