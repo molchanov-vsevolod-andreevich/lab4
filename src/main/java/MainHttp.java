@@ -1,6 +1,7 @@
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
@@ -10,6 +11,7 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.AllDirectives;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
+import akka.routing.RoundRobinPool;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
@@ -22,7 +24,7 @@ public class MainHttp extends AllDirectives {
 
     private MainHttp(final ActorSystem system) {
         storeActor = system.actorOf(StoreActor.props(), "storeActor");
-        testPackageActor = system.actorOf(TestPackageActor.props(), "testActor");
+        testPackageActor = system.actorOf(RoundRobinPool(5).props(Props.create(TestPackageActor.class, logResultsActor)); "testActor");
     }
 
     public static void main(String[] args) throws Exception {
