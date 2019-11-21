@@ -8,11 +8,6 @@ import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
 
-    public static Props props() {
-//        return Props.create(TestPackageActor.class);
-        return new RoundRobinPool(5).props(Props.create(TestPackageActor.class, logResultsActor));
-    }
-
     @Override
     public Receive createReceive() {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
