@@ -8,11 +8,10 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
-    ActorRef storeActor;
 
-//    public TestPackageActor(ActorRef storeActor) {
-//        this.storeActor = storeActor;
-//    }
+    public static Props props() {
+        return Props.create(StoreActor.class);
+    }
 
     @Override
     public Receive createReceive() {
