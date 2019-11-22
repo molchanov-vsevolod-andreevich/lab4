@@ -61,7 +61,7 @@ public class TestPackageRequest {
         }
     }
 
-    public class TestWithId {
+    public static class TestWithId {
         private final String packageId;
         private final Test test;
 

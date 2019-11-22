@@ -1,6 +1,7 @@
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import akka.japi.pf.ReceiveBuilder;
 import akka.routing.RoundRobinPool;
 
 import javax.script.Invocable;
@@ -15,10 +16,14 @@ public class TestPackageActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return null;
-//        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-//        engine.eval(jscript);
-//        Invocable invocable = (Invocable) engine;
-//        return invocable.invokeFunction(functionName, params).toString();
+        return ReceiveBuilder.create()
+                .match(TestPackageRequest.TestWithId.class, msg -> {
+                    
+                    ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+                    engine.eval(jscript);
+                    Invocable invocable = (Invocable) engine;
+                    return invocable.invokeFunction(functionName, params).toString();
+                })
+                .build();
     }
 }
