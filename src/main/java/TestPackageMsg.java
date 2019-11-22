@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TestPackageMsg {
     private final String packageId;
     private final String jsScript;
-    private final String ;
+    private final String functionName;
+    
 
     @JsonCreator
     public TestPackageMsg(@JsonProperty("packageId") int id, @JsonProperty("name") String name) {
