@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TestPackageResponse {
@@ -22,18 +21,14 @@ public class TestPackageResponse {
     }
 
     public class TestResult {
-        @JsonIgnore
-        private final String packageId;
         private final String testName;
         private final String expectedResult;
         private final String params;
 
         @JsonCreator
-        public TestResult(String packageId,
-                          @JsonProperty("testName") String testName,
+        public TestResult(@JsonProperty("testName") String testName,
                           @JsonProperty("expectedResul") String expectedResult,
                           @JsonProperty("params") String params) {
-            this.packageId = packageId;
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;

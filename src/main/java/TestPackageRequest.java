@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TestPackageRequest {
@@ -36,17 +35,14 @@ public class TestPackageRequest {
     }
 
     public class Test {
-        @JsonIgnore
-        private final String packageId;
         private final String testName;
         private final String expectedResult;
         private final String params;
 
         @JsonCreator
-        public Test(String packageId, @JsonProperty("testName") String testName,
+        public Test(@JsonProperty("testName") String testName,
                     @JsonProperty("expectedResul") String expectedResult,
                     @JsonProperty("params") String params) {
-            this.packageId = packageId;
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
@@ -62,6 +58,24 @@ public class TestPackageRequest {
 
         public String getParams() {
             return params;
+        }
+    }
+
+    public class TestWithId {
+        private final String packageId;
+        private final Test test;
+
+        public TestWithId(String packageId, Test test) {
+            this.packageId = packageId;
+            this.test = test;
+        }
+
+        public String getPackageId() {
+            return packageId;
+        }
+
+        public Test getTest() {
+            return test;
         }
     }
 }
