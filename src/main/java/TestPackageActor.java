@@ -18,7 +18,12 @@ public class TestPackageActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(TestPackageRequest.TestWithId.class, msg -> {
-                    
+                    boolean isCorrect;
+                    String result;
+                    String expectedResult =  msg.getTest().getExpectedResult();
+                    String testName = msg.getTest().getTestName();
+                    String params = msg.getTest().getParams();
+
                     ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
                     engine.eval(jscript);
                     Invocable invocable = (Invocable) engine;
