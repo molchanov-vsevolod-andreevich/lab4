@@ -2,17 +2,23 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonAutoDetect
 public class TestPackageRequest {
+    @JsonProperty("packageId")
     private final String packageId;
+    @JsonProperty("jsScript")
     private final String jsScript;
+    @JsonProperty("functionName")
     private final String functionName;
+    @JsonProperty("tests")
     private final Test[] tests;
 
-    @JsonCreator
-    public TestPackageRequest(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("jsScript") String jsScript,
-                              @JsonProperty("functionName") String functionName,
-                              @JsonProperty("tests") Test[] tests) {
+    public TestPackageRequest() {}
+
+    public TestPackageRequest(String packageId,
+                              String jsScript,
+                              String functionName,
+                              Test[] tests) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
@@ -36,15 +42,19 @@ public class TestPackageRequest {
     }
 
     @JsonAutoDetect
-    public class Test {
+    public static class Test {
+        @JsonProperty("testName")
         private final String testName;
+        @JsonProperty("expectedResult")
         private final String expectedResult;
+        @JsonProperty("params")
         private final Object[] params;
 
-        @JsonCreator
-        public Test(@JsonProperty("testName") String testName,
-                    @JsonProperty("expectedResult") String expectedResult,
-                    @JsonProperty("params") Object[] params) {
+        public Test() {}
+
+        public Test(String testName,
+                    String expectedResult,
+                    Object[] params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
