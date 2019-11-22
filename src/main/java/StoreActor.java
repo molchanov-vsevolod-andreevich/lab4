@@ -17,7 +17,6 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(TestPackageResponse.TestToStore.class, m -> {
-                    System.out.println("Hey");
                     String packageId = m.getPackageId();
                     TestPackageResponse.TestResult testResult = m.getTestResult();
                     if (store.containsKey(packageId)) {
