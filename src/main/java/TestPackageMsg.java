@@ -1,9 +1,12 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TestPackageMessage {
-    private final int id;
+    private final int packageID;
     private final String name;
 
     @JsonCreator
-    public Pet(@JsonProperty("id") int id, @JsonProperty("name") String name) {
+    public TestPackageMessage(@JsonProperty("id") int id, @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }
@@ -17,6 +20,6 @@ public class TestPackageMessage {
     }
 
     public class Test {
-        
+
     }
 }
