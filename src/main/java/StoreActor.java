@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
-    private Map<String, TestPackageResponse> store = new HashMap<>();
+    private Map<String, ArrayList<TestPackageResponse.TestResult>> store = new HashMap<>();
 
     public static Props props() {
         return Props.create(StoreActor.class);
@@ -16,13 +16,14 @@ public class StoreActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(StoreMessage.class, m -> {
-//                    store.put(m.getKey(), m.getValue());
-                    System.out.println("receive message! " + m.toString());
+                .match(TestPackageResponse.TestToStore.class, m -> {
+                    
                 })
                 .match(GetMessage.class, req -> sender().tell(
                         (store.get(req.getKey()) == null) ? "There is no such package" :
-                                store.get(req.getKey()), self())
+                                new TestPackageResponse(req.getKey(),
+                                        (TestPackageResponse.TestResult[]) store.get(req.getKey()).toArray()),
+                        self())
                 ).build();
     }
 
