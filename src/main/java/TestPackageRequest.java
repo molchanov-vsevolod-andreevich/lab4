@@ -45,20 +45,22 @@ public class TestPackageRequest {
         return tests;
     }
 
-    @JsonAutoDetect
+//    @JsonAutoDetect
     public static class Test {
-        @JsonProperty("testName")
+//        @JsonProperty("testName")
         private String testName;
-        @JsonProperty("expectedResult")
+//        @JsonProperty("expectedResult")
         private String expectedResult;
-        @JsonProperty("params")
+//        @JsonProperty("params")
         private Object[] params;
 
+        @JsonCreator
         public Test() {}
 
-        public Test(String testName,
-                    String expectedResult,
-                    Object[] params) {
+        @JsonCreator
+        public Test(@JsonProperty("testName") String testName,
+                    @JsonProperty("expectedResult") String expectedResult,
+                    @JsonProperty("params") Object[] params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
