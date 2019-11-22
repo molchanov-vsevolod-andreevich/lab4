@@ -41,7 +41,7 @@ public class TestPackageRequest {
 
         @JsonCreator
         public Test(@JsonProperty("testName") String testName,
-                    @JsonProperty("expectedResul") String expectedResult,
+                    @JsonProperty("expectedResult") String expectedResult,
                     @JsonProperty("params") String params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
