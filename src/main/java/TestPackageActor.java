@@ -28,7 +28,7 @@ public class TestPackageActor extends AbstractActor {
                     result = invocable.invokeFunction(msg.getFunctionName(), params).toString();
                     isCorrect = result.equals(expectedResult);
 
-                    getContext().actorSelection()
+                    getContext().actorSelection("/user/routeActor/storeActor")
                 })
                 .build();
     }
