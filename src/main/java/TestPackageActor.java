@@ -36,6 +36,7 @@ public class TestPackageActor extends AbstractActor {
                                                     expectedResult,
                                                     params)),
                                     self());
+                    System.out.println(result);
                 })
                 .build();
     }
