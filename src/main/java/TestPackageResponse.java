@@ -7,7 +7,7 @@ public class TestPackageResponse {
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") TestResult[] testsResults) {
+                              @JsonProperty("testsResults") Object[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
