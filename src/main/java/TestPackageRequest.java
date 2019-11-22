@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -34,6 +35,7 @@ public class TestPackageRequest {
         return tests;
     }
 
+    @JsonAutoDetect
     public class Test {
         private final String testName;
         private final String expectedResult;
