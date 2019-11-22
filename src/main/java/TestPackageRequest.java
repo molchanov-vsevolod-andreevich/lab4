@@ -29,19 +29,19 @@ public class TestPackageRequest {
 //        }
     }
 
-    public String getPackageId() {
+    String getPackageId() {
         return packageId;
     }
 
-    public String getJsScript() {
+    String getJsScript() {
         return jsScript;
     }
 
-    public String getFunctionName() {
+    String getFunctionName() {
         return functionName;
     }
 
-    public Test[] getTests() {
+    Test[] getTests() {
         return tests;
     }
 
@@ -64,45 +64,45 @@ public class TestPackageRequest {
             this.params = params;
         }
 
-        public String getTestName() {
+        String getTestName() {
             return testName;
         }
 
-        public String getExpectedResult() {
+        String getExpectedResult() {
             return expectedResult;
         }
 
-        public Object[] getParams() {
+        Object[] getParams() {
             return params;
         }
     }
 
-    public static class TestToEval {
+    static class TestToEval {
         private final String packageId;
         private final String jsScript;
         private final String functionName;
         private final Test test;
 
-        public TestToEval(String packageId, String jsScript, String functionName, Test test) {
+        TestToEval(String packageId, String jsScript, String functionName, Test test) {
             this.packageId = packageId;
             this.jsScript = jsScript;
             this.functionName = functionName;
             this.test = test;
         }
 
-        public String getPackageId() {
+        String getPackageId() {
             return packageId;
         }
 
-        public String getJsScript() {
+        String getJsScript() {
             return jsScript;
         }
 
-        public String getFunctionName() {
+        String getFunctionName() {
             return functionName;
         }
 
-        public Test getTest() {
+        Test getTest() {
             return test;
         }
     }

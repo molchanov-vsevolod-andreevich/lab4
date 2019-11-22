@@ -36,7 +36,7 @@ public class StoreActor extends AbstractActor {
     }
 
     static class GetMessage {
-        String key;
+        private final String key;
 
         GetMessage(String key) {
             this.key = key;
