@@ -62,8 +62,8 @@ public class TestPackageResponse {
     }
 
     public static class TestToStore {
-        String packageId;
-        TestResult testResult;
+        private final String packageId;
+        private final TestResult testResult;
 
         public TestToStore(String packageId, TestResult testResult) {
             this.packageId = packageId;

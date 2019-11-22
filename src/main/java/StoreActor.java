@@ -17,7 +17,15 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(TestPackageResponse.TestToStore.class, m -> {
-                    
+                    String packageId = m.getPackageId();
+                    TestPackageResponse.TestResult testResult = m.getTestResult();
+                    if (store.containsKey(packageId)) {
+                        store.get(packageId).add(testResult);
+                    } else {
+                        ArrayList<TestPackageResponse.TestResult> newPackage = new ArrayList<>();
+                        newPackage.add(testResult);
+                        store.put(packageId, newPackage);
+                    }
                 })
                 .match(GetMessage.class, req -> sender().tell(
                         (store.get(req.getKey()) == null) ? "There is no such package" :
