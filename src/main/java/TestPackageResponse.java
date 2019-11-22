@@ -23,6 +23,7 @@ public class TestPackageResponse {
     public class TestResult {
         private final String testName;
         private final boolean isCorrect;
+        private final String result;
         private final String expectedResult;
         private final String params;
 
