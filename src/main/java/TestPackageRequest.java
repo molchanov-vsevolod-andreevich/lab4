@@ -40,9 +40,6 @@ public class TestPackageRequest {
         private final Object[] params;
 
         @JsonCreator
-        public Test() {}
-
-        @JsonCreator
         public Test(@JsonProperty("testName") String testName,
                     @JsonProperty("expectedResult") String expectedResult,
                     @JsonProperty("params") Object[] params) {
