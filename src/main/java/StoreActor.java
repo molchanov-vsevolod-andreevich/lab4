@@ -25,19 +25,14 @@ public class StoreActor extends AbstractActor {
     }
 
     protected static class StoreMessage {
-        String key, value;
+        String packageID;
 
-        public StoreMessage(String key, String value) {
-            this.key = key;
-            this.value = value;
+        public StoreMessage(String packageID) {
+            this.packageID = packageID;
         }
 
-        public String getKey() {
-            return key;
-        }
-
-        public String getValue() {
-            return value;
+        public String getPackageID() {
+            return packageID;
         }
     }
 
