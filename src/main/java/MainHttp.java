@@ -24,13 +24,14 @@ public class MainHttp extends AllDirectives {
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
+        ActorRef routeActor = system.actorOf(RouteActor.props(), "routeActor");
 
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         MainHttp instance = new MainHttp();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                instance.createRoute().flow(system, materializer);
+                instance.createRoute(routeActor).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -43,13 +44,13 @@ public class MainHttp extends AllDirectives {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    private Route createRoute(ActorSystem system) {
+    private Route createRoute(ActorRef routeActor) {
         return route(
                 path("test", () ->
                         route(
                                 post(() ->
                                         entity(Jackson.unmarshaller(TestPackageMsg.class), msg -> {
-                                            testPackageActor.tell(msg, ActorRef.noSender());
+                                            routeActor.tell(msg, ActorRef.noSender());
                                             return complete("Test started!");
                                         })))),
                 path("put", () ->
@@ -57,7 +58,7 @@ public class MainHttp extends AllDirectives {
                                 parameter("key", (key) ->
                                         parameter("value", (value) ->
                                         {
-                                            storeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
+                                            routeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store! key=" + key + " value=" + value);
                                         })))));
     }
