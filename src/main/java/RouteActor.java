@@ -20,9 +20,11 @@ public class RouteActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(StoreActor.GetMessage.class, msg -> {
-                    storeActor.tell(msg, sender());
+                .match(StoreActor.GetMessage.class, req ->
+                        storeActor.tell(req, sender()))
+                .match(TestPackageActor.class, msg -> {
+
                 })
-                .match()
+                .build();
     }
 }
