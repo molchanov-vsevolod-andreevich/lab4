@@ -35,14 +35,14 @@ public class StoreActor extends AbstractActor {
                 ).build();
     }
 
-    static class GetMessage {
+    public static class GetMessage {
         private final String key;
 
-        GetMessage(String key) {
+        public GetMessage(String key) {
             this.key = key;
         }
 
-        String getKey() {
+        public String getKey() {
             return key;
         }
     }
