@@ -24,6 +24,9 @@ public class MainHttp extends AllDirectives {
     }
 
     public static void main(String[] args) throws Exception {
+        StoreActor.GetMessage m = new StoreActor.GetMessage("11");
+        m.key = "12";
+        System.out.println(m.key);
         ActorSystem system = ActorSystem.create("routes");
 
         final Http http = Http.get(system);

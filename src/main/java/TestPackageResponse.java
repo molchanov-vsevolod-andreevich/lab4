@@ -6,8 +6,8 @@ public class TestPackageResponse {
     private final Object[] testsResults;
 
     @JsonCreator
-    public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") Object[] testsResults) {
+    TestPackageResponse(@JsonProperty("packageId") String packageId,
+                        @JsonProperty("testsResults") Object[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -28,11 +28,11 @@ public class TestPackageResponse {
         private final Object[] params;
 
         @JsonCreator
-        public TestResult(@JsonProperty("testName") String testName,
-                          @JsonProperty("correct") boolean isCorrect,
-                          @JsonProperty("result") String result,
-                          @JsonProperty("expectedResul") String expectedResult,
-                          @JsonProperty("params") Object[] params) {
+        TestResult(@JsonProperty("testName") String testName,
+                   @JsonProperty("correct") boolean isCorrect,
+                   @JsonProperty("result") String result,
+                   @JsonProperty("expectedResul") String expectedResult,
+                   @JsonProperty("params") Object[] params) {
             this.testName = testName;
             this.isCorrect = isCorrect;
             this.result = result;
@@ -61,20 +61,20 @@ public class TestPackageResponse {
         }
     }
 
-    public static class TestToStore {
+    static class TestToStore {
         private final String packageId;
         private final TestResult testResult;
 
-        public TestToStore(String packageId, TestResult testResult) {
+        TestToStore(String packageId, TestResult testResult) {
             this.packageId = packageId;
             this.testResult = testResult;
         }
 
-        public String getPackageId() {
+        String getPackageId() {
             return packageId;
         }
 
-        public TestResult getTestResult() {
+        TestResult getTestResult() {
             return testResult;
         }
     }

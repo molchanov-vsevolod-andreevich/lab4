@@ -9,7 +9,7 @@ import java.util.Map;
 public class StoreActor extends AbstractActor {
     private Map<String, ArrayList<TestPackageResponse.TestResult>> store = new HashMap<>();
 
-    public static Props props() {
+    static Props props() {
         return Props.create(StoreActor.class);
     }
 
@@ -35,14 +35,14 @@ public class StoreActor extends AbstractActor {
                 ).build();
     }
 
-    protected static class GetMessage {
+    static class GetMessage {
         String key;
 
-        public GetMessage(String key) {
+        GetMessage(String key) {
             this.key = key;
         }
 
-        public String getKey() {
+        String getKey() {
             return key;
         }
     }
