@@ -20,6 +20,7 @@ public class TestPackageResponse {
         return testsResults;
     }
 
+    public class TestResult {
         private final String testName;
         private final String expectedResult;
         private final String params;
