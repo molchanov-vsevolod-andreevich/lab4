@@ -28,7 +28,7 @@ public class TestPackageMsg {
 
     public class Test {
         private final String testName;
-        private final String jsScript;
+        private final String expectedResul;
         private final String functionName;
         private final Test[] tests;
 
