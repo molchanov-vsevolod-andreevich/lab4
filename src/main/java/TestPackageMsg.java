@@ -16,4 +16,7 @@ public class TestPackageMessage {
         return name;
     }
 
+    public class Test {
+        
+    }
 }
