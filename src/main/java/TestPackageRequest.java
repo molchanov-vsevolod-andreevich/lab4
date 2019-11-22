@@ -63,6 +63,7 @@ public class TestPackageRequest {
 
     public class TestWithId {
         private final String packageId;
+        private final String jsScript
         private final Test test;
 
         public TestWithId(String packageId, Test test) {
@@ -76,6 +77,10 @@ public class TestPackageRequest {
 
         public Test getTest() {
             return test;
+        }
+
+        public String getParams() {
+            return params;
         }
     }
 }
