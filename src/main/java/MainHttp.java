@@ -57,7 +57,7 @@ public class MainHttp extends AllDirectives {
                         get(() ->
                                 parameter("packageID", (packageID) ->
                                         {
-                                            Future<Object> res = Patterns.ask(routeActor, )
+                                            Future<Object> res = Patterns.ask(routeActor, 5000)
                                             routeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store! key=" + key + " value=" + value);
                                         }))));
