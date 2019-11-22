@@ -24,7 +24,6 @@ public class TestPackageResponse {
         private final String testName;
         private final String expectedResult;
         private final String params;
-        
 
         @JsonCreator
         public TestResult(@JsonProperty("testName") String testName,

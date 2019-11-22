@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
-    private Map<String, > store = new HashMap<>();
+    private Map<String, TestPackageResponse> store = new HashMap<>();
 
     public static Props props() {
         return Props.create(StoreActor.class);
