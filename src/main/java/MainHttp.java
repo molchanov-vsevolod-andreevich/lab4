@@ -49,7 +49,7 @@ public class MainHttp extends AllDirectives {
                 path("test", () ->
                         route(
                                 post(() ->
-                                        entity(Jackson.unmarshaller(TestPackageMsg.class), msg -> {
+                                        entity(Jackson.unmarshaller(TestPackageRequest.class), msg -> {
                                             routeActor.tell(msg, ActorRef.noSender());
                                             return complete("Test started!");
                                         })))),

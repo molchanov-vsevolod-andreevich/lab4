@@ -1,17 +1,17 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TestPackageMsg {
+public class TestPackageRequest {
     private final String packageId;
     private final String jsScript;
     private final String functionName;
     private final Test[] tests;
 
     @JsonCreator
-    public TestPackageMsg(@JsonProperty("packageId") String packageId,
-                          @JsonProperty("jsScript") String jsScript,
-                          @JsonProperty("functionName") String functionName,
-                          @JsonProperty("tests") Test[] tests) {
+    public TestPackageRequest(@JsonProperty("packageId") String packageId,
+                              @JsonProperty("jsScript") String jsScript,
+                              @JsonProperty("functionName") String functionName,
+                              @JsonProperty("tests") Test[] tests) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
