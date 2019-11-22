@@ -17,19 +17,21 @@ import java.util.concurrent.CompletionStage;
 import scala.concurrent.Future;
 
 public class MainHttp extends AllDirectives {
+    private final ActorRef routeActor;
 
-    private MainHttp() {}
+    private MainHttp(ActorSystem system) {
+        routeActor = system.actorOf(RouteActor.props(), "routeActor");
+    }
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
-        ActorRef routeActor = system.actorOf(RouteActor.props(), "routeActor");
 
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        MainHttp instance = new MainHttp();
+        MainHttp instance = new MainHttp(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                instance.createRoute(routeActor).flow(system, materializer);
+                instance.createRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -42,7 +44,7 @@ public class MainHttp extends AllDirectives {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    private Route createRoute(ActorRef routeActor) {
+    private Route createRoute() {
         return route(
                 path("test", () ->
                         route(
