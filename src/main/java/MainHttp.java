@@ -18,7 +18,7 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
-public class MainHttp {
+public class MainHttp extends AllDirectives {
     private final ActorRef routeActor;
 
     private MainHttp(ActorSystem system) {
@@ -33,7 +33,7 @@ public class MainHttp {
 
         MainHttp instance = new MainHttp(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                instance.createRoute(routeActor).flow(system, materializer);
+                instance.createRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -44,5 +44,24 @@ public class MainHttp {
         binding
                 .thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> system.terminate());
+    }
+
+    private Route createRoute() {
+        return route(
+                path("test", () ->
+                        route(
+                                post(() ->
+                                        entity(Jackson.unmarshaller(TestPackageMsg.class), msg -> {
+                                            routeActor.tell(msg, ActorRef.noSender());
+                                            return complete("Test started!");
+                                        })))),
+                path("put", () ->
+                        get(() ->
+                                parameter("packageID", (packageID) ->
+                                        {
+                                            Future<Object> res = Patterns.ask(routeActor, 5000)
+                                            routeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
+                                            return completeOKWithFuture();
+                                        }))));
     }
 }
