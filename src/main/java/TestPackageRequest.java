@@ -22,7 +22,10 @@ public class TestPackageRequest {
         this.tests = tests;
         System.out.println(packageId + " " + jsScript + " " + functionName + " ");
         for (Test test : tests) {
-            System.out.println(test.testName + " " + test.expectedResult + " " + test.params);
+            System.out.println(test.testName + " " + test.expectedResult);
+            for (Object par : test.params) {
+                System.out.println(par);
+            }
         }
     }
 
