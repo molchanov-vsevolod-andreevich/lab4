@@ -28,9 +28,11 @@ public class StoreActor extends AbstractActor {
                     }
                 })
                 .match(GetMessage.class, req -> sender().tell(
-                        (store.get(req.getKey()) == null) ? "There is no such package" :
-                                new TestPackageResponse(req.getKey(),
-                                        (TestPackageResponse.TestResult[]) store.get(req.getKey()).toArray()),
+//                        (store.get(req.getKey()) == null) ? "There is no such package" :
+//                                new TestPackageResponse(req.getKey(),
+//                                        (TestPackageResponse.TestResult[]) store.get(req.getKey()).toArray()),
+                        new TestPackageResponse(req.getKey(),
+                                (TestPackageResponse.TestResult[]) store.get(req.getKey()).toArray()),
                         self())
                 ).build();
     }
