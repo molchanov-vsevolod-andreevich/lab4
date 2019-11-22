@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonAutoDetect
 public class TestPackageRequest {
-    @JsonProperty("packageId")
+//    @JsonProperty("packageId")
     private final String packageId;
-    @JsonProperty("jsScript")
+//    @JsonProperty("jsScript")
     private final String jsScript;
-    @JsonProperty("functionName")
+//    @JsonProperty("functionName")
     private final String functionName;
-    @JsonProperty("tests")
+//    @JsonProperty("tests")
     private final Test[] tests;
 
     public TestPackageRequest() {}
