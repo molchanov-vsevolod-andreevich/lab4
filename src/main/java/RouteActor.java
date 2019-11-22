@@ -5,15 +5,15 @@ import akka.japi.pf.ReceiveBuilder;
 import akka.routing.RoundRobinPool;
 
 public class RouteActor extends AbstractActor {
-    private ActorRef storeActor;
-    private ActorRef testPackageActor;
+    private final ActorRef storeActor;
+    private final ActorRef testPackageActor;
 
-    RouteActor() {
+    public RouteActor() {
         storeActor = getContext().actorOf(StoreActor.props(), "storeActor");
         testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
     }
 
-    static Props props() {
+    public static Props props() {
         return Props.create(RouteActor.class);
     }
 
