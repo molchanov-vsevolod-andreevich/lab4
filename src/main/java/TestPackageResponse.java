@@ -50,4 +50,8 @@ public class TestPackageResponse {
             return params;
         }
     }
+
+    public class TestToStore {
+        
+    }
 }
