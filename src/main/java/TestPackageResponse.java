@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TestPackageResponse {
     private final String packageId;
-    private final List<TestResult> testsResults;
+    private final ArrayList<TestResult> testsResults;
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
