@@ -8,7 +8,7 @@ import javax.script.ScriptEngineManager;
 
 public class TestPackageActor extends AbstractActor {
 
-    public static Props props() {
+    static Props props() {
         return Props.create(TestPackageActor.class);
     }
 
@@ -36,7 +36,7 @@ public class TestPackageActor extends AbstractActor {
                                                     expectedResult,
                                                     params)),
                                     self());
-                    System.out.println(result);
+//                    System.out.println(result);
                 })
                 .build();
     }
