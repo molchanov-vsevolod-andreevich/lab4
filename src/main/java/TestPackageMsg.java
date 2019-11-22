@@ -5,11 +5,14 @@ public class TestPackageMsg {
     private final String packageId;
     private final String jsScript;
     private final String functionName;
-    private final Test tests
+    private final Test tests;
 
     @JsonCreator
-    public TestPackageMsg(@JsonProperty("packageId") int id, @JsonProperty("name") String name) {
-        this.id = id;
+    public TestPackageMsg(@JsonProperty("packageId") String packageId,
+                          @JsonProperty("jsScript") String jsScript,
+                          @JsonProperty("functionName") String functionName,
+                          @JsonProperty("tests")) {
+        this.packageId = ;
         this.name = name;
     }
 
