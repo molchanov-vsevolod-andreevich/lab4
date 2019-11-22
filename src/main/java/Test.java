@@ -2,12 +2,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonAutoDetect
-public static class Test {
-    @JsonProperty("testName")
+public class Test {
+//    @JsonProperty("testName")
     private final String testName;
-    @JsonProperty("expectedResult")
+//    @JsonProperty("expectedResult")
     private final String expectedResult;
-    @JsonProperty("params")
+//    @JsonProperty("params")
     private final Object[] params;
 
     public Test() {}
