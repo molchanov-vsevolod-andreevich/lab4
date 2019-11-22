@@ -60,4 +60,22 @@ public class TestPackageRequest {
             return params;
         }
     }
+
+    public static class TestWithId {
+        private final String packageId;
+        private final Test test;
+
+        public TestWithId(String packageId, Test test) {
+            this.packageId = packageId;
+            this.test = test;
+        }
+
+        public String getPackageId() {
+            return packageId;
+        }
+
+        public Test getTest() {
+            return test;
+        }
+    }
 }

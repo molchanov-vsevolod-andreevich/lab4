@@ -25,7 +25,7 @@ public class TestPackageActor extends AbstractActor {
                     String params = msg.getTest().getParams();
 
                     ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-                    engine.eval(msg.getTest().);
+                    engine.eval(msg.getTest());
                     Invocable invocable = (Invocable) engine;
                     return invocable.invokeFunction(functionName, params).toString();
                 })
