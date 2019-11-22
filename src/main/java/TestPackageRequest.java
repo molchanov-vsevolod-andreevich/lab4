@@ -41,6 +41,38 @@ public class TestPackageRequest {
         return tests;
     }
 
+    @JsonAutoDetect
+    public static class Test {
+        @JsonProperty("testName")
+        private final String testName;
+        @JsonProperty("expectedResult")
+        private final String expectedResult;
+        @JsonProperty("params")
+        private final Object[] params;
+
+        public Test() {}
+
+        public Test(String testName,
+                    String expectedResult,
+                    Object[] params) {
+            this.testName = testName;
+            this.expectedResult = expectedResult;
+            this.params = params;
+        }
+
+        public String getTestName() {
+            return testName;
+        }
+
+        public String getExpectedResult() {
+            return expectedResult;
+        }
+
+        public Object[] getParams() {
+            return params;
+        }
+    }
+
     public static class TestToEval {
         private final String packageId;
         private final String jsScript;
