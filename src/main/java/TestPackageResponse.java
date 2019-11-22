@@ -3,11 +3,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TestPackageResponse {
     private final String packageId;
-    private final Object[] testsResults;
+    private final TestResult[] testsResults;
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") Object[] testsResults) {
+                              @JsonProperty("testsResults") TestResult[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -16,7 +16,7 @@ public class TestPackageResponse {
         return packageId;
     }
 
-    public Object[] getTestsResults() {
+    public TestResult[] getTestsResults() {
         return testsResults;
     }
 
