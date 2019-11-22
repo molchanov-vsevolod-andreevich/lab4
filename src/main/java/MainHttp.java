@@ -20,10 +20,7 @@ import java.util.concurrent.Future;
 
 public class MainHttp extends AllDirectives {
 
-    private MainHttp(final ActorSystem system) {
-        storeActor = system.actorOf(StoreActor.props(), "storeActor");
-        testPackageActor = system.actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
-    }
+    private MainHttp() {}
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
@@ -31,7 +28,7 @@ public class MainHttp extends AllDirectives {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        MainHttp instance = new MainHttp(system);
+        MainHttp instance = new MainHttp();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                 instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
