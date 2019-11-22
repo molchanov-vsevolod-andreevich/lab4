@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class TestPackageResponse {
     private final String packageId;
-    private final ArrayList<TestResult> testsResults;
+    private final TestResult[] testsResults;
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") ArrayList<TestResult> testsResults) {
+                              @JsonProperty("testsResults") TestResult[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -19,17 +19,19 @@ public class TestPackageResponse {
         return packageId;
     }
 
-    public ArrayList<TestResult> getTestsResults() {
+    public TestResult[] getTestsResults() {
         return testsResults;
     }
 
     public class TestResult {
+        private final String packageId;
         private final String testName;
         private final String expectedResult;
         private final String params;
 
         @JsonCreator
         public TestResult(@JsonProperty("testName") String testName,
+                          @JsonProperty("testName") String testName,
                           @JsonProperty("expectedResul") String expectedResult,
                           @JsonProperty("params") String params) {
             this.testName = testName;
