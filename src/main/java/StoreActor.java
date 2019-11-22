@@ -17,12 +17,14 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(StoreMessage.class, m -> {
-                    store.put(m.getKey(), m.getValue());
+//                    store.put(m.getKey(), m.getValue());
                     System.out.println("receive message! " + m.toString());
                 })
                 .match(GetMessage.class, req -> sender().tell(
-                        (store.get(req.getKey())?
-                        new TestPackageResponse(req.getKey(), store.get(req.getKey())), self())
+                        (store.get(req.getKey()) == null) ? "There is no such package" :
+                                new TestPackageResponse(req.getKey(),
+                                        (TestPackageResponse.TestResult[]) store.get(req.getKey()).toArray()),
+                        self())
                 ).build();
     }
 
