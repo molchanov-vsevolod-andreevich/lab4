@@ -14,7 +14,7 @@ public class RouteActor extends AbstractActor {
     }
 
     public static Props props() {
-        return Props.create(StoreActor.class);
+        return Props.create(RouteActor.class);
     }
 
     @Override
