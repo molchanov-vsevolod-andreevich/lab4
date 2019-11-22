@@ -20,7 +20,10 @@ public class TestPackageRequest {
         this.jsScript = jsScript;
         this.functionName = functionName;
         this.tests = tests;
-        System.out.println(packageId + " " + jsScript + " " + functionName + " " + tests);
+        System.out.println(packageId + " " + jsScript + " " + functionName + " ");
+        for (Test test : tests) {
+            System.out.println(test.testName + " " + test.);
+        }
     }
 
     public String getPackageId() {
