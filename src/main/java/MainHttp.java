@@ -55,11 +55,11 @@ public class MainHttp extends AllDirectives {
                                         })))),
                 path("put", () ->
                         get(() ->
-                                parameter("key", (key) ->
-                                        parameter("value", (value) ->
+                                parameter("packageID", (packageID) ->
                                         {
+                                            Future<>
                                             routeActor.tell(new StoreActor.StoreMessage(key, value), ActorRef.noSender());
                                             return complete("value saved to store! key=" + key + " value=" + value);
-                                        })))));
+                                        }))));
     }
 }
