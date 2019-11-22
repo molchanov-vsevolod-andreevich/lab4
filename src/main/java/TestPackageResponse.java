@@ -22,6 +22,7 @@ public class TestPackageResponse {
 
     public class TestResult {
         private final String testName;
+        private final boolean isCorrect;
         private final String expectedResult;
         private final String params;
 
@@ -52,6 +53,6 @@ public class TestPackageResponse {
     }
 
     public class TestToStore {
-        
+
     }
 }
