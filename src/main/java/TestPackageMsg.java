@@ -27,7 +27,7 @@ public class TestPackageMsg {
     }
 
     public class Test {
-        private final String packageId;
+        private final String testName;
         private final String jsScript;
         private final String functionName;
         private final Test[] tests;
