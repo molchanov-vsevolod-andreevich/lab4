@@ -1,13 +1,16 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
+
 public class TestPackageResponse {
     private final String packageId;
-    private final TestResult[] testsResults;
+    private final List<TestResult> testsResults;
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") TestResult[] testsResults) {
+                              @JsonProperty("testsResults") List<TestResult> testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -16,7 +19,7 @@ public class TestPackageResponse {
         return packageId;
     }
 
-    public TestResult[] getTestsResults() {
+    public List<TestResult> getTestsResults() {
         return testsResults;
     }
 
