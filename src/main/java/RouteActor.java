@@ -23,8 +23,10 @@ public class RouteActor extends AbstractActor {
                 .match(StoreActor.GetMessage.class, req -> {
                     storeActor.tell(req, sender());
                 })
-                .match(TestPackageActor.class, msg -> {
-
+                .match(TestPackageMsg.class, msg -> {
+                    for (TestPackageMsg.Test test : msg.getTests()) {
+                        testPackageActor.tell();
+                    }
                 })
                 .build();
     }
