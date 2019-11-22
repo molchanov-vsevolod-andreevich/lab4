@@ -1,24 +1,20 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TestPackageResponse {
-    private final String packageId;
-    private final Object[] testsResults;
+class TestPackageResponse {
 
     @JsonCreator
     TestPackageResponse(@JsonProperty("packageId") String packageId,
                         @JsonProperty("testsResults") Object[] testsResults) {
-        this.packageId = packageId;
-        this.testsResults = testsResults;
     }
 
-    public String getPackageId() {
-        return packageId;
-    }
-
-    public Object[] getTestsResults() {
-        return testsResults;
-    }
+//    public String getPackageId() {
+//        return packageId;
+//    }
+//
+//    public Object[] getTestsResults() {
+//        return testsResults;
+//    }
 
     public static class TestResult {
         private final String testName;
@@ -40,25 +36,25 @@ public class TestPackageResponse {
             this.params = params;
         }
 
-        public String getTestName() {
-            return testName;
-        }
-
-        public boolean getIsCorrect() {
-            return isCorrect;
-        }
-
-        public String getResult() {
-            return result;
-        }
-
-        public String getExpectedResult() {
-            return expectedResult;
-        }
-
-        public Object[] getParams() {
-            return params;
-        }
+//        public String getTestName() {
+//            return testName;
+//        }
+//
+//        public boolean getIsCorrect() {
+//            return isCorrect;
+//        }
+//
+//        public String getResult() {
+//            return result;
+//        }
+//
+//        public String getExpectedResult() {
+//            return expectedResult;
+//        }
+//
+//        public Object[] getParams() {
+//            return params;
+//        }
     }
 
     static class TestToStore {

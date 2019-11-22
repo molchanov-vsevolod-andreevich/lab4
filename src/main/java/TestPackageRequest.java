@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,9 +6,6 @@ public class TestPackageRequest {
     private String jsScript;
     private String functionName;
     private Test[] tests;
-
-//    @JsonCreator
-//    public TestPackageRequest() {}
 
     @JsonCreator
     public TestPackageRequest(@JsonProperty("packageId") String packageId,
@@ -49,9 +45,6 @@ public class TestPackageRequest {
         private String testName;
         private String expectedResult;
         private Object[] params;
-
-//        @JsonCreator
-//        public Test() {}
 
         @JsonCreator
         public Test(@JsonProperty("testName") String testName,

@@ -13,7 +13,7 @@ public class RouteActor extends AbstractActor {
         testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
     }
 
-    public static Props props() {
+    static Props props() {
         return Props.create(RouteActor.class);
     }
 
