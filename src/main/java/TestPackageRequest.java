@@ -37,12 +37,12 @@ public class TestPackageRequest {
     public class Test {
         private final String testName;
         private final String expectedResult;
-        private final String params;
+        private final Object[] params;
 
         @JsonCreator
         public Test(@JsonProperty("testName") String testName,
                     @JsonProperty("expectedResult") String expectedResult,
-                    @JsonProperty("params") String params) {
+                    @JsonProperty("params") Object[] params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
@@ -56,7 +56,7 @@ public class TestPackageRequest {
             return expectedResult;
         }
 
-        public String getParams() {
+        public Object[] getParams() {
             return params;
         }
     }

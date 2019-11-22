@@ -19,7 +19,7 @@ public class TestPackageActor extends AbstractActor {
                     boolean isCorrect;
                     String result;
                     String expectedResult = msg.getTest().getExpectedResult();
-                    String params = msg.getTest().getParams();
+                    Object[] params = msg.getTest().getParams();
                     String testName = msg.getTest().getTestName();
 
                     ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");

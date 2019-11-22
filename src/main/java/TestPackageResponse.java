@@ -25,14 +25,14 @@ public class TestPackageResponse {
         private final boolean isCorrect;
         private final String result;
         private final String expectedResult;
-        private final String params;
+        private final Object[] params;
 
         @JsonCreator
         public TestResult(@JsonProperty("testName") String testName,
                           @JsonProperty("correct") boolean isCorrect,
                           @JsonProperty("result") String result,
                           @JsonProperty("expectedResul") String expectedResult,
-                          @JsonProperty("params") String params) {
+                          @JsonProperty("params") Object[] params) {
             this.testName = testName;
             this.isCorrect = isCorrect;
             this.result = result;
@@ -56,7 +56,7 @@ public class TestPackageResponse {
             return expectedResult;
         }
 
-        public String getParams() {
+        public Object[] getParams() {
             return params;
         }
     }
