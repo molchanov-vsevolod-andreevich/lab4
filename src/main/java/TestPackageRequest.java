@@ -2,23 +2,20 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonAutoDetect
 public class TestPackageRequest {
-//    @JsonProperty("packageId")
-    private final String packageId;
-//    @JsonProperty("jsScript")
-    private final String jsScript;
-//    @JsonProperty("functionName")
-    private final String functionName;
-//    @JsonProperty("tests")
-    private final Test[] tests;
+    private String packageId;
+    private String jsScript;
+    private String functionName;
+    private Test[] tests;
 
+    @JsonCreator
     public TestPackageRequest() {}
 
-    public TestPackageRequest(String packageId,
-                              String jsScript,
-                              String functionName,
-                              Test[] tests) {
+    @JsonCreator
+    public TestPackageRequest(@JsonProperty("packageId") String packageId,
+                              @JsonProperty("jsScript") String jsScript,
+                              @JsonProperty("functionName") String functionName,
+                              @JsonProperty("tests") Test[] tests) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
@@ -44,11 +41,11 @@ public class TestPackageRequest {
     @JsonAutoDetect
     public static class Test {
         @JsonProperty("testName")
-        private final String testName;
+        private String testName;
         @JsonProperty("expectedResult")
-        private final String expectedResult;
+        private String expectedResult;
         @JsonProperty("params")
-        private final Object[] params;
+        private Object[] params;
 
         public Test() {}
 
