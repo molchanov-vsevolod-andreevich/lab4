@@ -2,11 +2,12 @@ import akka.actor.AbstractActor;
 import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StoreActor extends AbstractActor {
-    private Map<String, TestPackageResponse> store = new HashMap<>();
+    private Map<String, ArrayList<TestPackageResponse.TestResult>> store = new HashMap<>();
 
     public static Props props() {
         return Props.create(StoreActor.class);
@@ -20,7 +21,8 @@ public class StoreActor extends AbstractActor {
                     System.out.println("receive message! " + m.toString());
                 })
                 .match(GetMessage.class, req -> sender().tell(
-                        new StoreMessage(req.getKey(), store.get(req.getKey())), self())
+                        (store.get(req.getKey())?
+                        new TestPackageResponse(req.getKey(), store.get(req.getKey())), self())
                 ).build();
     }
 

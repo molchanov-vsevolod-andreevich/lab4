@@ -2,9 +2,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-
-
 public class TestPackageResponse {
     private final String packageId;
     private final TestResult[] testsResults;
@@ -36,9 +33,14 @@ public class TestPackageResponse {
                           @JsonProperty("testName") String testName,
                           @JsonProperty("expectedResul") String expectedResult,
                           @JsonProperty("params") String params) {
+            this.packageId = packageId;
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
+        }
+
+        public String getPackageId() {
+            return packageId;
         }
 
         public String getTestName() {
