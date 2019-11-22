@@ -25,13 +25,13 @@ public class RouteActor extends AbstractActor {
                     storeActor.tell(req, sender());
                 })
                 .match(TestPackageRequest.class, msg -> {
-                    System.out.println(msg.getPackageId() + " " + msg.getJsScript() + " " + msg.getFunctionName() + " ");
-                    for (TestPackageRequest.Test test : msg.getTests()) {
-                        System.out.println(test.getTestName() + " " + test.getExpectedResult());
-                        for (Object par : test.getParams()) {
-                            System.out.println(par);
-                        }
-                    }
+//                    System.out.println(msg.getPackageId() + " " + msg.getJsScript() + " " + msg.getFunctionName() + " ");
+//                    for (TestPackageRequest.Test test : msg.getTests()) {
+//                        System.out.println(test.getTestName() + " " + test.getExpectedResult());
+//                        for (Object par : test.getParams()) {
+//                            System.out.println(par);
+//                        }
+//                    }
                     for (TestPackageRequest.Test test : msg.getTests()) {
                         testPackageActor.tell(new TestPackageRequest.TestToEval(msg.getPackageId(),
                                         msg.getJsScript(),
