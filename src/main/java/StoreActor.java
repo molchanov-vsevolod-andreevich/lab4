@@ -9,7 +9,7 @@ import java.util.Map;
 public class StoreActor extends AbstractActor {
     private Map<String, ArrayList<TestPackageResponse.TestResult>> store = new HashMap<>();
 
-    static Props props() {
+    public Props props() {
         return Props.create(StoreActor.class);
     }
 
