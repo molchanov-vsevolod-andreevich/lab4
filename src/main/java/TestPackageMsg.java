@@ -36,15 +36,15 @@ public class TestPackageMsg {
 
     public class Test {
         private final String testName;
-        private final String expectedResul;
+        private final String expectedResult;
         private final String params;
 
         @JsonCreator
         public Test(@JsonProperty("testName") String testName,
-                    @JsonProperty("expectedResul") String expectedResul,
+                    @JsonProperty("expectedResul") String expectedResult,
                     @JsonProperty("params") String params) {
             this.testName = testName;
-            this.expectedResul = expectedResul;
+            this.expectedResult = expectedResult;
             this.params = params;
         }
 
@@ -52,8 +52,8 @@ public class TestPackageMsg {
             return testName;
         }
 
-        public String getExpectedResul() {
-            return expectedResul;
+        public String getExpectedResult() {
+            return expectedResult;
         }
 
         public String getParams() {
