@@ -2,11 +2,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TestPackageMsg {
-    private final String packageID;
+    private final String packageId;
     private final String name;
 
     @JsonCreator
-    public TestPackageMsg(@JsonProperty("packageID") int id, @JsonProperty("name") String name) {
+    public TestPackageMsg(@JsonProperty("packageId") int id, @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }
