@@ -6,10 +6,9 @@ public class TestPackageResponse {
     private final Test[] testsResults;
 
     @JsonCreator
-    public TestPackageResponse(String packageId, Test[] testsResults) {
+    public TestPackageResponse(@JsonProperty("packageId") String packageId,
+                              @JsonProperty("testsResults") Test[] testsResults) {
         this.packageId = packageId;
-        this.jsScript = jsScript;
-        this.functionName = functionName;
         this.testsResults = testsResults;
     }
 
