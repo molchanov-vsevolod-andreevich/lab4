@@ -8,8 +8,8 @@ public class TestPackageRequest {
     private String functionName;
     private Test[] tests;
 
-    @JsonCreator
-    public TestPackageRequest() {}
+//    @JsonCreator
+//    public TestPackageRequest() {}
 
     @JsonCreator
     public TestPackageRequest(@JsonProperty("packageId") String packageId,
@@ -45,17 +45,13 @@ public class TestPackageRequest {
         return tests;
     }
 
-//    @JsonAutoDetect
     public static class Test {
-//        @JsonProperty("testName")
         private String testName;
-//        @JsonProperty("expectedResult")
         private String expectedResult;
-//        @JsonProperty("params")
         private Object[] params;
 
-        @JsonCreator
-        public Test() {}
+//        @JsonCreator
+//        public Test() {}
 
         @JsonCreator
         public Test(@JsonProperty("testName") String testName,
