@@ -26,23 +26,6 @@ public class StoreActor extends AbstractActor {
                 ).build();
     }
 
-    protected static class StoreMessage {
-        String key, value;
-
-        public StoreMessage(String key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
     protected static class GetMessage {
         String key;
 

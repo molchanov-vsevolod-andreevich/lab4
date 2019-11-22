@@ -30,7 +30,12 @@ public class TestPackageActor extends AbstractActor {
 
                     getContext().actorSelection("/user/routeActor/storeActor")
                             .tell(new TestPackageResponse.TestToStore(msg.getPackageId(),
-                                    new TestPackageResponse.TestResult()));
+                                            new TestPackageResponse.TestResult(testName,
+                                                    isCorrect,
+                                                    result,
+                                                    expectedResult,
+                                                    params)),
+                                    self());
                 })
                 .build();
     }

@@ -20,7 +20,7 @@ public class TestPackageResponse {
         return testsResults;
     }
 
-    public class TestResult {
+    public static class TestResult {
         private final String testName;
         private final boolean isCorrect;
         private final String result;
@@ -29,19 +29,27 @@ public class TestPackageResponse {
 
         @JsonCreator
         public TestResult(@JsonProperty("testName") String testName,
+                          @JsonProperty("correct") boolean isCorrect,
+                          @JsonProperty("result") String result,
                           @JsonProperty("expectedResul") String expectedResult,
                           @JsonProperty("params") String params) {
             this.testName = testName;
+            this.isCorrect = isCorrect;
+            this.result = result;
             this.expectedResult = expectedResult;
             this.params = params;
         }
 
-        public String getPackageId() {
-            return packageId;
-        }
-
         public String getTestName() {
             return testName;
+        }
+
+        public boolean getIsCorrect() {
+            return isCorrect;
+        }
+
+        public String getResult() {
+            return result;
         }
 
         public String getExpectedResult() {
@@ -53,7 +61,21 @@ public class TestPackageResponse {
         }
     }
 
-    public class TestToStore {
+    public static class TestToStore {
+        String packageId;
+        TestResult testResult;
 
+        public TestToStore(String packageId, TestResult testResult) {
+            this.packageId = packageId;
+            this.testResult = testResult;
+        }
+
+        public String getPackageId() {
+            return packageId;
+        }
+
+        public TestResult getTestResult() {
+            return testResult;
+        }
     }
 }
