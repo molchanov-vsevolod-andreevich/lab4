@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class TestPackageResponse {
@@ -10,7 +10,7 @@ public class TestPackageResponse {
 
     @JsonCreator
     public TestPackageResponse(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("testsResults") List<TestResult> testsResults) {
+                              @JsonProperty("testsResults") ArrayList<TestResult> testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -19,7 +19,7 @@ public class TestPackageResponse {
         return packageId;
     }
 
-    public List<TestResult> getTestsResults() {
+    public ArrayList<TestResult> getTestsResults() {
         return testsResults;
     }
 
