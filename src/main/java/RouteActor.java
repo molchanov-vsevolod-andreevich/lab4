@@ -25,7 +25,7 @@ public class RouteActor extends AbstractActor {
                 })
                 .match(TestPackageRequest.class, msg -> {
                     for (TestPackageRequest.Test test : msg.getTests()) {
-                        testPackageActor.tell(new TestPackageRequest.TestWithId(msg.getPackageId(), test), self());
+                        testPackageActor.tell(new TestPackageRequest(msg.getPackageId(), msg.getJsScript(), msg.getFunctionName(), test), self());
                     }
                 })
                 .build();
