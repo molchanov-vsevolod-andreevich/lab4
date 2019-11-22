@@ -5,7 +5,7 @@ public class TestPackageMsg {
     private final String packageId;
     private final String jsScript;
     private final String functionName;
-    
+    private final Test 
 
     @JsonCreator
     public TestPackageMsg(@JsonProperty("packageId") int id, @JsonProperty("name") String name) {
