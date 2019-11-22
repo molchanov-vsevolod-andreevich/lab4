@@ -55,9 +55,9 @@ public class MainHttp extends AllDirectives {
                                         })))),
                 path("put", () ->
                         get(() ->
-                                parameter("packageID", (packageID) ->
+                                parameter("packageId", (packageId) ->
                                         {
-                                            Future<Object> res = Patterns.ask(routeActor, new StoreActor.GetMessage(packageID), 5000);
+                                            Future<Object> res = Patterns.ask(routeActor, new StoreActor.GetMessage(packageId), 5000);
                                             return completeOKWithFuture(res, Jackson.marshaller());
                                         }))));
     }
