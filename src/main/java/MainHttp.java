@@ -31,7 +31,7 @@ public class MainHttp extends AllDirectives {
 
         MainHttp instance = new MainHttp();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                instance.createRoute(routeActor).flow(system, materializer);
+                instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -44,7 +44,7 @@ public class MainHttp extends AllDirectives {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    private Route createRoute(ActorRef routeActor) {
+    private Route createRoute(ActorSystem system) {
         return route(
                 path("test", () ->
                         route(
