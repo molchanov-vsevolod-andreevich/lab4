@@ -21,7 +21,6 @@ public class RouteActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(StoreActor.GetMessage.class, req -> {
-                    System.out.println("Hey");
                     storeActor.tell(req, sender());
                 })
                 .match(TestPackageRequest.class, msg -> {
