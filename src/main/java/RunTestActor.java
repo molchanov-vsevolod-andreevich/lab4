@@ -1,4 +1,5 @@
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
 
@@ -8,8 +9,8 @@ import javax.script.ScriptEngineManager;
 
 public class RunTestActor extends AbstractActor {
 
-    static Props props() {
-        return Props.create(RunTestActor.class);
+    static Props props(ActorRef storeActor) {
+        return Props.create(RunTestActor.class, storeActor);
     }
 
     @Override
