@@ -3,7 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({})
+@JsonPropertyOrder({AkkaAppConstants.PACKAGE_ID_FIELD, AkkaAppConstants.})
 class TestPackageResponse {
     private final String packageId;
     private final Object[] testsResults;
