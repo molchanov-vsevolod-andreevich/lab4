@@ -50,6 +50,15 @@ public class TestPackageRequest {
         private Object[] params;
 
         @JsonCreator
+        public Test(@JsonProperty("testName") String testName,
+                    @JsonProperty("expectedResult") String expectedResult,
+                    @JsonProperty("params") Object[] params) {
+            this.testName = testName;
+            this.expectedResult = expectedResult;
+            this.params = params;
+        }
+
+        @JsonCreator
         public Test(String packageId, @JsonProperty("testName") String testName,
                     @JsonProperty("expectedResult") String expectedResult,
                     @JsonProperty("params") Object[] params) {
