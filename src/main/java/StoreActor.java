@@ -26,11 +26,13 @@ public class StoreActor extends AbstractActor {
                         store.put(packageId, newPackage);
                     }
                 })
-                .match(GetMessage.class, req -> sender().tell(
-                        (store.get(req.getKey()) == null) ? AkkaAppConstants.NO_SUCH_PACKAGE_MESSAGE :
-                                new TestPackageResponse(req.getKey(),
-                                        store.get(req.getKey()).toArray()),
-                        self())
+                .match(GetMessage.class, req -> {
+                    sender().tell(
+                            (store.get(req.getKey()) == null) ? AkkaAppConstants.NO_SUCH_PACKAGE_MESSAGE :
+                                    new TestPackageResponse(req.getKey(),
+                                            store.get(req.getKey()).toArray()),
+                            self());
+                        }
                 ).build();
     }
 
