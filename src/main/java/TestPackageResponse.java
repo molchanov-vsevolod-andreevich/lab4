@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         AkkaAppConstants.TEST_RESULTS_FIELD,
         AkkaAppConstants.TEST_NAME_FIELD,
         AkkaAppConstants.IS_CORRECT_FIELD,
-        AkkaAppConstants.})
+        AkkaAppConstants.RESULT_FIELD,
+        AkkaAppConstants.EXPECTED_RESULT_FIELD,
+        AkkaAppConstants.RESULT_FIELD,})
 class TestPackageResponse {
     private final String packageId;
     private final Object[] testsResults;
