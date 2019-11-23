@@ -27,16 +27,16 @@ public class StoreActor extends AbstractActor {
                     }
                 })
                 .match(GetMessage.class, req -> {
-                    TestPackageResponse.TestResult[] results = new TestPackageResponse.TestResult[store.get(req.getKey()).size()];
+                    TestPackageResponse.TestResult[] testResults = new TestPackageResponse.TestResult[store.get(req.getKey()).size()];
                     int i = 0;
                     for (Object o : store.get(req.getKey())) {
-                        results[i] = (TestPackageResponse.TestResult) o;
+                        testResults[i] = (TestPackageResponse.TestResult) o;
                         i++;
                     }
                     sender().tell(
                             (store.get(req.getKey()) == null) ? AkkaAppConstants.NO_SUCH_PACKAGE_MESSAGE :
                                     new TestPackageResponse(req.getKey(),
-                                            results),
+                                            testResults),
                             self());
                         }
                 ).build();
