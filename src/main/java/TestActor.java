@@ -6,10 +6,10 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-public class TestPackageActor extends AbstractActor {
+public class TestActor extends AbstractActor {
 
     static Props props() {
-        return Props.create(TestPackageActor.class);
+        return Props.create(TestActor.class);
     }
 
     @Override

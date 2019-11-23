@@ -3,7 +3,7 @@ class AkkaAppConstants {
     static final String ACTOR_SYSTEM_NAME = "routes";
     static final String ROUTE_ACTOR_NAME = "routeActor";
     static final String STORE_ACTOR_NAME = "storeActor";
-    static final String TEST_PACKAGE_ACTOR_NAME = "testPackageActor";
+    static final String TEST_ACTOR_NAME = "testActor";
     static final String STORE_ACTOR_PATH = "/user/" + ROUTE_ACTOR_NAME + "/" + STORE_ACTOR_NAME;
 
     // Server Constants

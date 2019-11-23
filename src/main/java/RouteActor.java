@@ -10,7 +10,7 @@ public class RouteActor extends AbstractActor {
 
     public RouteActor() {
         storeActor = getContext().actorOf(StoreActor.props(), AkkaAppConstants.STORE_ACTOR_NAME);
-        testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), AkkaAppConstants.TEST_PACKAGE_ACTOR_NAME);
+        testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestActor.props()), AkkaAppConstants.TEST_ACTOR_NAME);
     }
 
     static Props props() {
