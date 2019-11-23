@@ -34,13 +34,12 @@ public class RunTestActor extends AbstractActor {
                     result = invocable.invokeFunction(msg.getFunctionName(), params).toString();
                     isCorrect = result.equals(expectedResult);
 
-                    getContext().actorSelection(AkkaAppConstants.STORE_ACTOR_PATH)
-                            .tell(new TestPackageResponse.TestResult(msg.getPackageId(), testName,
-                                                    isCorrect,
-                                                    result,
-                                                    expectedResult,
-                                                    params),
-                                    self());
+                    storeActor.tell(new TestPackageResponse.TestResult(msg.getPackageId(), testName,
+                                    isCorrect,
+                                    result,
+                                    expectedResult,
+                                    params),
+                            self());
                 })
                 .build();
     }
