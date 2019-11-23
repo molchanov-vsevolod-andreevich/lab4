@@ -28,8 +28,10 @@ public class StoreActor extends AbstractActor {
                 })
                 .match(GetMessage.class, req -> {
                     TestPackageResponse.TestResult[] results = new TestPackageResponse.TestResult[store.get(req.getKey()).size()];
+                    int i = 0;
                     for (Object o : store.get(req.getKey())) {
-                        
+                        results[i] = (TestPackageResponse.TestResult) o;
+                        i++;
                     }
 
                     sender().tell(
