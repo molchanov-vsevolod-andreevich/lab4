@@ -68,22 +68,4 @@ class TestPackageResponse {
             return params;
         }
     }
-
-    static class TestToStore {
-        private final String packageId;
-        private final TestResult testResult;
-
-        TestToStore(String packageId, TestResult testResult) {
-            this.packageId = packageId;
-            this.testResult = testResult;
-        }
-
-        String getPackageId() {
-            return packageId;
-        }
-
-        TestResult getTestResult() {
-            return testResult;
-        }
-    }
 }
