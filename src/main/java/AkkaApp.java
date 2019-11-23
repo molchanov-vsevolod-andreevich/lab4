@@ -16,7 +16,7 @@ import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletionStage;
 import scala.concurrent.Future;
 
-public class MainHttp {
+public class AkkaApp {
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
