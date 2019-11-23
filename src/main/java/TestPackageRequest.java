@@ -43,8 +43,6 @@ public class TestPackageRequest {
     }
 
     public static class Test {
-        @JsonIgnore
-        private String packageId;
         private String testName;
         private String expectedResult;
         private Object[] params;
