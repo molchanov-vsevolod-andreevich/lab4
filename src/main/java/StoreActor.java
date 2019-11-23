@@ -28,6 +28,7 @@ public class StoreActor extends AbstractActor {
                 })
                 .match(GetMessage.class, req -> {
                     sender().tell(
+                            TestPackageResponse.TestResult r = (TestPackageResponse.TestResult) store.get(req.getKey()).get(0);
                             (store.get(req.getKey()) == null) ? AkkaAppConstants.NO_SUCH_PACKAGE_MESSAGE :
                                     new TestPackageResponse(req.getKey(),
                                             store.get(req.getKey()).toArray()),
