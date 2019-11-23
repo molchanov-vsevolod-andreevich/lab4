@@ -29,12 +29,11 @@ public class TestPackageActor extends AbstractActor {
                     isCorrect = result.equals(expectedResult);
 
                     getContext().actorSelection("/user/routeActor/storeActor")
-                            .tell(new TestPackageResponse.TestToStore(msg.getPackageId(),
-                                            new TestPackageResponse.TestResult(testName,
+                            .tell(new TestPackageResponse.TestResult(msg.getPackageId(), testName,
                                                     isCorrect,
                                                     result,
                                                     expectedResult,
-                                                    params)),
+                                                    params),
                                     self());
 //                    System.out.println(result);
                 })

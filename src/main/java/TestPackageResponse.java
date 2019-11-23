@@ -36,12 +36,16 @@ class TestPackageResponse {
                    @JsonProperty("result") String result,
                    @JsonProperty("expectedResult") String expectedResult,
                    @JsonProperty("params") Object[] params) {
-            this.
+            this.packageId = packageId;
             this.testName = testName;
             this.isCorrect = isCorrect;
             this.result = result;
             this.expectedResult = expectedResult;
             this.params = params;
+        }
+
+        public String getPackageId() {
+            return packageId;
         }
 
         public String getTestName() {
