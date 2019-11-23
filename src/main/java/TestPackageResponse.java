@@ -3,13 +3,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({AkkaAppConstants.PACKAGE_ID_FIELD,
-        AkkaAppConstants.TEST_RESULTS_FIELD,
-        AkkaAppConstants.TEST_NAME_FIELD,
-        AkkaAppConstants.IS_CORRECT_FIELD,
-        AkkaAppConstants.RESULT_FIELD,
-        AkkaAppConstants.EXPECTED_RESULT_FIELD,
-        AkkaAppConstants.PARAMS_FIELD})
 class TestPackageResponse {
     private final String packageId;
     private final Object[] testsResults;
@@ -29,6 +22,11 @@ class TestPackageResponse {
         return testsResults;
     }
 
+    @JsonPropertyOrder({AkkaAppConstants.TEST_NAME_FIELD,
+            AkkaAppConstants.IS_CORRECT_FIELD,
+            AkkaAppConstants.RESULT_FIELD,
+            AkkaAppConstants.EXPECTED_RESULT_FIELD,
+            AkkaAppConstants.PARAMS_FIELD})
     static class TestResult {
         @JsonIgnore
         private final String packageId;
