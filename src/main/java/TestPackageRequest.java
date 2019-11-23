@@ -68,34 +68,4 @@ public class TestPackageRequest {
             return params;
         }
     }
-
-    static class TestToEval {
-        private final String packageId;
-        private final String jsScript;
-        private final String functionName;
-        private final Test test;
-
-        TestToEval(String packageId, String jsScript, String functionName, Test test) {
-            this.packageId = packageId;
-            this.jsScript = jsScript;
-            this.functionName = functionName;
-            this.test = test;
-        }
-
-        String getPackageId() {
-            return packageId;
-        }
-
-        String getJsScript() {
-            return jsScript;
-        }
-
-        String getFunctionName() {
-            return functionName;
-        }
-
-        Test getTest() {
-            return test;
-        }
-    }
 }
