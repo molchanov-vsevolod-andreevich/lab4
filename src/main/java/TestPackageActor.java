@@ -22,20 +22,19 @@ public class TestPackageActor extends AbstractActor {
                     Object[] params = msg.getTest().getParams();
                     String testName = msg.getTest().getTestName();
 
-                    ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+                    ScriptEngine engine = new ScriptEngineManager().getEngineByName(AkkaAppConstants.JS_ENGINE_NAME);
                     engine.eval(msg.getJsScript());
                     Invocable invocable = (Invocable) engine;
                     result = invocable.invokeFunction(msg.getFunctionName(), params).toString();
                     isCorrect = result.equals(expectedResult);
 
-                    getContext().actorSelection("/user/routeActor/storeActor")
+                    getContext().actorSelection(AkkaAppConstants.STORE_ACTOR_PATH)
                             .tell(new TestPackageResponse.TestResult(msg.getPackageId(), testName,
                                                     isCorrect,
                                                     result,
                                                     expectedResult,
                                                     params),
                                     self());
-//                    System.out.println(result);
                 })
                 .build();
     }

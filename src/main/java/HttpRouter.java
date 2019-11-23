@@ -10,21 +10,21 @@ class HttpRouter extends AllDirectives {
     private final ActorRef routeActor;
 
     HttpRouter(ActorSystem system) {
-        routeActor = system.actorOf(RouteActor.props(), "routeActor");
+        routeActor = system.actorOf(RouteActor.props(), AkkaAppConstants.ROUTE_ACTOR_NAME);
     }
 
     Route createRoute() {
         return route(
-                path("test", () ->
+                path(AkkaAppConstants.SERVER_POST_PATH, () ->
                         route(
                                 post(() ->
                                         entity(Jackson.unmarshaller(TestPackageRequest.class), msg -> {
                                             routeActor.tell(msg, ActorRef.noSender());
-                                            return complete("Test started!");
+                                            return complete(AkkaAppConstants.START_TEST_MESSAGE);
                                         })))),
-                path("put", () ->
+                path(AkkaAppConstants.SERVER_GET_PATH, () ->
                         get(() ->
-                                parameter("packageId", (packageId) ->
+                                parameter(AkkaAppConstants.PACKAGE_ID_PARAMETER_NAME, (packageId) ->
                                 {
                                     Future<Object> res = Patterns.ask(routeActor, new StoreActor.GetMessage(packageId), 5000);
                                     return completeOKWithFuture(res, Jackson.marshaller());

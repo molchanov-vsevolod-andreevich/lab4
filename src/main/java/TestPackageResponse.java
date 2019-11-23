@@ -7,8 +7,8 @@ class TestPackageResponse {
     private final Object[] testsResults;
 
     @JsonCreator
-    TestPackageResponse(@JsonProperty("packageId") String packageId,
-                        @JsonProperty("testsResults") Object[] testsResults) {
+    TestPackageResponse(@JsonProperty(AkkaAppConstants.PACKAGE_ID_FIELD) String packageId,
+                        @JsonProperty(AkkaAppConstants.TEST_RESULTS_FIELD) Object[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }
@@ -31,11 +31,11 @@ class TestPackageResponse {
         private final Object[] params;
 
         @JsonCreator
-        TestResult(String packageId, @JsonProperty("testName") String testName,
-                   @JsonProperty("correct") boolean isCorrect,
-                   @JsonProperty("result") String result,
-                   @JsonProperty("expectedResult") String expectedResult,
-                   @JsonProperty("params") Object[] params) {
+        TestResult(String packageId, @JsonProperty(AkkaAppConstants.TEST_NAME_FIELD) String testName,
+                   @JsonProperty(AkkaAppConstants.IS_CORRECT_FIELD) boolean isCorrect,
+                   @JsonProperty(AkkaAppConstants.RESULT_FIELD) String result,
+                   @JsonProperty(AkkaAppConstants.EXPECTED_RESULT_FIELD) String expectedResult,
+                   @JsonProperty(AkkaAppConstants.PARAMS_FIELD) Object[] params) {
             this.packageId = packageId;
             this.testName = testName;
             this.isCorrect = isCorrect;

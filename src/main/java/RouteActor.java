@@ -9,8 +9,8 @@ public class RouteActor extends AbstractActor {
     private final ActorRef testPackageActor;
 
     public RouteActor() {
-        storeActor = getContext().actorOf(StoreActor.props(), "storeActor");
-        testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), "testActor");
+        storeActor = getContext().actorOf(StoreActor.props(), AkkaAppConstants.STORE_ACTOR_NAME);
+        testPackageActor = getContext().actorOf(new RoundRobinPool(5).props(TestPackageActor.props()), AkkaAppConstants.TEST_PACKAGE_ACTOR_NAME);
     }
 
     static Props props() {
@@ -21,17 +21,9 @@ public class RouteActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(StoreActor.GetMessage.class, req -> {
-//                    System.out.println("Hey");
                     storeActor.tell(req, sender());
                 })
                 .match(TestPackageRequest.class, msg -> {
-//                    System.out.println(msg.getPackageId() + " " + msg.getJsScript() + " " + msg.getFunctionName() + " ");
-//                    for (TestPackageRequest.Test test : msg.getTests()) {
-//                        System.out.println(test.getTestName() + " " + test.getExpectedResult());
-//                        for (Object par : test.getParams()) {
-//                            System.out.println(par);
-//                        }
-//                    }
                     for (TestPackageRequest.Test test : msg.getTests()) {
                         testPackageActor.tell(new TestToEval(msg.getPackageId(),
                                         msg.getJsScript(),

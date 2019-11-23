@@ -9,21 +9,14 @@ public class TestPackageRequest {
     private Test[] tests;
 
     @JsonCreator
-    public TestPackageRequest(@JsonProperty("packageId") String packageId,
-                              @JsonProperty("jsScript") String jsScript,
-                              @JsonProperty("functionName") String functionName,
-                              @JsonProperty("tests") Test[] tests) {
+    public TestPackageRequest(@JsonProperty(AkkaAppConstants.PACKAGE_ID_FIELD) String packageId,
+                              @JsonProperty(AkkaAppConstants.JS_SCRIPT_FIELD) String jsScript,
+                              @JsonProperty(AkkaAppConstants.FUNCTION_NAME_FIELD) String functionName,
+                              @JsonProperty(AkkaAppConstants.TESTS_FIELD) Test[] tests) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
         this.tests = tests;
-//        System.out.println(packageId + " " + jsScript + " " + functionName + " ");
-//        for (Test test : tests) {
-//            System.out.println(test.testName + " " + test.expectedResult);
-//            for (Object par : test.params) {
-//                System.out.println(par);
-//            }
-//        }
     }
 
     String getPackageId() {
@@ -48,9 +41,9 @@ public class TestPackageRequest {
         private Object[] params;
 
         @JsonCreator
-        public Test(@JsonProperty("testName") String testName,
-                    @JsonProperty("expectedResult") String expectedResult,
-                    @JsonProperty("params") Object[] params) {
+        public Test(@JsonProperty(AkkaAppConstants.TEST_NAME_FIELD) String testName,
+                    @JsonProperty(AkkaAppConstants.EXPECTED_RESULT_FIELD) String expectedResult,
+                    @JsonProperty(AkkaAppConstants.PARAMS_FIELD) Object[] params) {
             this.testName = testName;
             this.expectedResult = expectedResult;
             this.params = params;
