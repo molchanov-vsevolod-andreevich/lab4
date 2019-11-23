@@ -6,14 +6,14 @@ import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import scala.concurrent.Future;
 
-public class HttpRouter extends AllDirectives {
+class HttpRouter extends AllDirectives {
     private final ActorRef routeActor;
 
-    private HttpRouter(ActorSystem system) {
+    HttpRouter(ActorSystem system) {
         routeActor = system.actorOf(RouteActor.props(), "routeActor");
     }
 
-    private Route createRoute() {
+    Route createRoute() {
         return route(
                 path("test", () ->
                         route(
