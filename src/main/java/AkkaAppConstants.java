@@ -31,7 +31,7 @@ class AkkaAppConstants {
     static final String PARAMS_FIELD = "params";
 
     static final String TEST_RESULTS_FIELD = "testsResults";
-    static final String IS_CORRECT_FIELD = "correct";
+    static final String IS_CORRECT_FIELD = "isCorrect";
     static final String RESULT_FIELD = "result";
 
     // Other Constants
