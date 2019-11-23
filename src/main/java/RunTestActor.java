@@ -8,9 +8,14 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 public class RunTestActor extends AbstractActor {
+    ActorRef storeActor;
 
     static Props props(ActorRef storeActor) {
         return Props.create(RunTestActor.class, storeActor);
+    }
+
+    public RunTestActor(ActorRef storeActor) {
+        this.storeActor = storeActor;
     }
 
     @Override
