@@ -1,29 +1,29 @@
-static class TestToEval {
+public class TestToEval {
     private final String packageId;
     private final String jsScript;
     private final String functionName;
     private final TestPackageRequest.Test test;
 
-    TestToEval(String packageId, String jsScript, String functionName, TestPackageRequest.Test test) {
+    public TestToEval(String packageId, String jsScript, String functionName, TestPackageRequest.Test test) {
         this.packageId = packageId;
         this.jsScript = jsScript;
         this.functionName = functionName;
         this.test = test;
     }
 
-    String getPackageId() {
+    public String getPackageId() {
         return packageId;
     }
 
-    String getJsScript() {
+    public String getJsScript() {
         return jsScript;
     }
 
-    String getFunctionName() {
+    public String getFunctionName() {
         return functionName;
     }
 
-    TestPackageRequest.Test getTest() {
+    public TestPackageRequest.Test getTest() {
         return test;
     }
 }

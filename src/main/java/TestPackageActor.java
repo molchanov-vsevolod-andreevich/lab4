@@ -15,7 +15,7 @@ public class TestPackageActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(TestPackageRequest.TestToEval.class, msg -> {
+                .match(TestToEval.class, msg -> {
                     boolean isCorrect;
                     String result;
                     String expectedResult = msg.getTest().getExpectedResult();

@@ -33,7 +33,7 @@ public class RouteActor extends AbstractActor {
 //                        }
 //                    }
                     for (TestPackageRequest.Test test : msg.getTests()) {
-                        testPackageActor.tell(new TestPackageRequest.TestToEval(msg.getPackageId(),
+                        testPackageActor.tell(new TestToEval(msg.getPackageId(),
                                         msg.getJsScript(),
                                         msg.getFunctionName(),
                                         test),
