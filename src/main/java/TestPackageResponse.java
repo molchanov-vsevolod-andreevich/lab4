@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 class TestPackageResponse {
     private final String packageId;
-    private final Object[] testsResults;
+    private final TestResult[] testsResults;
 
     @JsonCreator
     TestPackageResponse(@JsonProperty(AkkaAppConstants.PACKAGE_ID_FIELD) String packageId,
-                        @JsonProperty(AkkaAppConstants.TEST_RESULTS_FIELD) Object[] testsResults) {
+                        @JsonProperty(AkkaAppConstants.TEST_RESULTS_FIELD) TestResult[] testsResults) {
         this.packageId = packageId;
         this.testsResults = testsResults;
     }

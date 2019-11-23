@@ -33,11 +33,10 @@ public class StoreActor extends AbstractActor {
                         results[i] = (TestPackageResponse.TestResult) o;
                         i++;
                     }
-
                     sender().tell(
                             (store.get(req.getKey()) == null) ? AkkaAppConstants.NO_SUCH_PACKAGE_MESSAGE :
                                     new TestPackageResponse(req.getKey(),
-                                            store.get(req.getKey()).toArray()),
+                                            results),
                             self());
                         }
                 ).build();
