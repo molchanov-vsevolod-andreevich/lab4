@@ -8,7 +8,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 public class RunTestActor extends AbstractActor {
-    ActorRef storeActor;
+    private final ActorRef storeActor;
 
     static Props props(ActorRef storeActor) {
         return Props.create(RunTestActor.class, storeActor);
